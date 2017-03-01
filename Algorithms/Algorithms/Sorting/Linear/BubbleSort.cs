@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace Algorithms.Sorting.Linear
 {
-    //Comparisons
-    //Swaps
-
     public class BubbleSort 
     {
         public static IEnumerable<T> Sort<T>(IEnumerable<T> source) where T : IComparable<T>

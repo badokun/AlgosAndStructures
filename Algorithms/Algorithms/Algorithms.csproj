@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sorting\Linear\BubbleSort.cs" />
+    <Compile Include="Sorting\Linear\InsertionSort.cs" />
     <Compile Include="Sorting\Linear\Metrics.cs" />
   </ItemGroup>
   <ItemGroup>
