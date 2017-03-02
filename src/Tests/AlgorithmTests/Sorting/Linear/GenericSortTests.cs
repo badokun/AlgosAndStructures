@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Algorithms.Sorting.DevideAndConquer;
-using Algorithms.Sorting.Linear;
 using NUnit.Framework;
 
 namespace AlgorithmTests.Sorting.Linear
@@ -11,7 +8,7 @@ namespace AlgorithmTests.Sorting.Linear
     [TestFixture]
     public class GenericSortTests
     {
-        [TestCaseSource(typeof (SortingFunctionsSource), "Linear")]
+        [TestCaseSource(typeof (SortingFunctionsSource), nameof(SortingFunctionsSource.Linear))]
         public void OrderItemsCorrectly(string name, Func<int[], int[]> sortingFunction)
         {
             // Arrange
@@ -27,7 +24,7 @@ namespace AlgorithmTests.Sorting.Linear
             Assert.AreEqual(source.Count(), result.Count());
         }
 
-        [TestCaseSource(typeof(SortingFunctionsSource), "Linear")]
+        [TestCaseSource(typeof(SortingFunctionsSource), nameof(SortingFunctionsSource.Linear))]
         public void OrderItemsCorrectlyFixedSource(string name, Func<int[], int[]> sortingFunction)
         {
             // Arrange
@@ -35,14 +32,13 @@ namespace AlgorithmTests.Sorting.Linear
 
             // Act
             var result = sortingFunction(source).ToList();
-            Console.WriteLine(string.Join(".", source));
 
             // Assert
             // Compare against .NET built in sorting
             Assert.AreEqual("2.2.4.7.8.9.12.13.15.18", string.Join(".", result));
         }
 
-        [TestCaseSource(typeof(SortingFunctionsSource), "Linear")]
+        [TestCaseSource(typeof(SortingFunctionsSource), nameof(SortingFunctionsSource.Linear))]
         public void OrderItemsCorrectlyFixedSourceAsInExample(string name, Func<int[], int[]> sortingFunction)
         {
             // Arrange
@@ -50,8 +46,6 @@ namespace AlgorithmTests.Sorting.Linear
 
             // Act
             var result = sortingFunction(source).ToList();
-            Console.WriteLine(string.Join(".", source));
-            Console.WriteLine(string.Join(".", result));
 
             // Assert
             // Compare against .NET built in sorting
@@ -66,51 +60,5 @@ namespace AlgorithmTests.Sorting.Linear
                 yield return random.Next();
             }
         }
-    }
-
-    public class SortingFunctionsSource
-    {
-        public static IEnumerable Linear
-        {
-            get
-            {
-                return GetAll().Select(algo => new TestCaseData(algo.Name, algo.SortingFunc));
-            }
-        }
-
-        private static IEnumerable<SortingAlgo> GetAll()
-        {
-            yield return new SortingAlgo()
-            {
-                Name = "MergeSort",
-                SortingFunc = MergeSort.Sort
-            };
-
-            yield return new SortingAlgo()
-            {
-                Name = "SelectionSort",
-                SortingFunc = SelectionSort.Sort
-            };
-
-            yield return new SortingAlgo()
-            {
-                Name = "BubbleSort",
-                SortingFunc = BubbleSort.Sort
-            };
-
-            yield return new SortingAlgo()
-            {
-                Name = "InsertionSort",
-                SortingFunc = InsertionSort.Sort
-            };
-
-            
-        } 
-    }
-
-    internal class SortingAlgo
-    {
-        internal string Name { get; set; }
-        internal Func<int[], int[]> SortingFunc { get; set; }
     }
 }
