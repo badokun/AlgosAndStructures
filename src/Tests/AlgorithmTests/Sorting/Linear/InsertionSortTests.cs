@@ -24,14 +24,15 @@ namespace AlgorithmTests.Sorting.Linear
         public void OrderItemsCorrectly()
         {
             // Arrange
-            var source = new[] { "d", "c", "b", "a", "f", "a" };
+            // 4.2.9.15.13.8.7.18.2.12
+            var source = new[] { 4,2,9,15,13,8,7,18,2,12 };
 
             // Act
             var result = InsertionSort.Sort(source).ToList();
 
             // Assert
             Assert.AreEqual(source.Count(), result.Count());
-            Assert.AreEqual("a.a.b.c.d.f", string.Join(".", result));
+            Assert.AreEqual("2.2.4.7.8.9.12.13.15.18", string.Join(".", result));
         }
     }
 }
