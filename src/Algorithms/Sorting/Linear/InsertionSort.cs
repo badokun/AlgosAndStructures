@@ -17,7 +17,7 @@ namespace Algorithms.Sorting.Linear
                 {
                     var currentIndex = i;
                     var insertionIndex = FindInsertionIndex(itemArray, currentIndex, currentItem);
-                    Shared.Move<T>(itemArray, currentIndex, insertionIndex);
+                    Shared.InsertAndShiftToRight(itemArray, currentIndex, insertionIndex);
                 }
             }
 
@@ -27,11 +27,12 @@ namespace Algorithms.Sorting.Linear
        
 
 
-        private static int FindInsertionIndex<T>(T[] itemArray, int currenIndex, T currenItem) where T : IComparable<T>
+        private static int FindInsertionIndex<T>(T[] itemArray, int currenIndex, T itemToCompare) where T : IComparable<T>
         {
             for (int j = currenIndex-1; j >= 0; j--)
             {
-                if (itemArray[j].IsSmallerThan(currenItem))
+                var currentItem = itemArray[j];
+                if (currentItem.IsSmallerThan(itemToCompare))
                 {
                     return j+1;
                 }

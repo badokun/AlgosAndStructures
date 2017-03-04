@@ -41,12 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\BadMatchTable.cs" />
+    <Compile Include="Search\IStringSearchAlgo.cs" />
+    <Compile Include="Search\BoyerMoore.cs" />
+    <Compile Include="Search\SearchMatch.cs" />
     <Compile Include="Sorting\DevideAndConquer\Extensions.cs" />
     <Compile Include="Sorting\DevideAndConquer\MergeSort.cs" />
     <Compile Include="Sorting\DevideAndConquer\QuickSortAlgo.cs" />
     <Compile Include="Sorting\Linear\BubbleSort.cs" />
     <Compile Include="Sorting\Linear\InsertionSort.cs" />
-    <Compile Include="Sorting\Linear\Metrics.cs" />
     <Compile Include="Sorting\Linear\SelectionSort.cs" />
     <Compile Include="Sorting\Linear\Shared.cs" />
   </ItemGroup>

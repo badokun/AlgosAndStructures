@@ -9,19 +9,22 @@ namespace Algorithms.Sorting.Linear
         {
             var itemArray = source.ToArray();
 
-            for (int i = 0; i < itemArray.Length; i++)
+            for (int currentIndex = 0; currentIndex < itemArray.Length; currentIndex++)
             {
-                int smallestItemIndex = i;
-                for (int j = i; j < itemArray.Length-1; j++)
+                int smallestItemIndex = currentIndex;
+                for (int scanningIndex = currentIndex; scanningIndex < itemArray.Length-1; scanningIndex++)
                 {
-                    if (itemArray[j + 1].CompareTo(itemArray[smallestItemIndex]) < 0)
+                    var nextItem = itemArray[scanningIndex + 1];
+                    var nextItemIndex = scanningIndex + 1;
+                    var smallestItem = itemArray[smallestItemIndex];
+                    if (nextItem.IsSmallerThan(smallestItem))
                     {
-                        smallestItemIndex = j + 1;
+                        smallestItemIndex = nextItemIndex;
                     }
                 }
-                if (smallestItemIndex != 0 && smallestItemIndex != i)
+                if (smallestItemIndex != 0 && smallestItemIndex != currentIndex)
                 {
-                    Shared.Move(itemArray, smallestItemIndex, i);
+                    Shared.InsertAndShiftToRight(itemArray, smallestItemIndex, currentIndex);
                 }
             }
 
