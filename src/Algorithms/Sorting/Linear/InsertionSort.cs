@@ -11,13 +11,13 @@ namespace Algorithms.Sorting.Linear
 
             for (int i = 1; i < itemArray.Length; i++)
             {
-                var currentValue = itemArray[i];
-                var oneBefore = itemArray[i - 1];
-                if (IsSmallerThan<T>(currentValue, oneBefore))
+                var currentItem = itemArray[i];
+                var left = itemArray[i - 1];
+                if (currentItem.IsSmallerThan(left))
                 {
-                    var currentValueIndex = i;
-                    var insertionIndex = FindInsertionIndex<T>(itemArray, currentValueIndex, currentValue);
-                    Shared.Move<T>(itemArray, currentValueIndex, insertionIndex);
+                    var currentIndex = i;
+                    var insertionIndex = FindInsertionIndex(itemArray, currentIndex, currentItem);
+                    Shared.Move<T>(itemArray, currentIndex, insertionIndex);
                 }
             }
 
@@ -27,21 +27,17 @@ namespace Algorithms.Sorting.Linear
        
 
 
-        private static int FindInsertionIndex<T>(T[] itemArray, int currentValueIndex, T currentValue) where T : IComparable<T>
+        private static int FindInsertionIndex<T>(T[] itemArray, int currenIndex, T currenItem) where T : IComparable<T>
         {
-            for (int j = currentValueIndex-1; j >= 0; j--)
+            for (int j = currenIndex-1; j >= 0; j--)
             {
-                if (IsSmallerThan<T>(itemArray[j], currentValue))
+                if (itemArray[j].IsSmallerThan(currenItem))
                 {
                     return j+1;
                 }
             }
             return 0;
         }
-
-        private static bool IsSmallerThan<T>(T current, T target) where T : IComparable<T>
-        {
-            return current.CompareTo(target) < 0;
-        }
+         
     }
 }

@@ -21,16 +21,15 @@ namespace AlgorithmTests.Sorting.Linear
         {
             yield return new SortingAlgo()
             {
+                Name = "MergeSort",
+                SortingFunc = MergeSort.Sort
+            };
+            yield return new SortingAlgo()
+            {
                 Name = "QuickSortAlgo",
                 SortingFunc = QuickSortAlgo.Sort
             };
             
-            yield return new SortingAlgo()
-            {
-                Name = "MergeSort",
-                SortingFunc = MergeSort.Sort
-            };
-
             yield return new SortingAlgo()
             {
                 Name = "SelectionSort",

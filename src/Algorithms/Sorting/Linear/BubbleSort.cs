@@ -9,22 +9,24 @@ namespace Algorithms.Sorting.Linear
             var allSorted = false;
             while (!allSorted)
             {
-                bool hasSwitched = false;
+                bool itemPushedToTheEnd = false;
                 for (int i = 0; i < source.Length-1; i++)
                 {
-                    if (source[i].CompareTo(source[i + 1]) > 0)
+                    var currentItem = source[i];
+                    var right = source[i + 1];
+                    if (currentItem.IsGreaterThan(right))
                     {
-                        var tempLeft = source[i];
-                        var tempRight = source[i+1];
-                        source[i] = tempRight;
-                        source[i + 1] = tempLeft;
-                        hasSwitched = true;
+                        Shared.Swap(source, i, i + 1);
+                        itemPushedToTheEnd = true;
                     }
                 }
-                allSorted = hasSwitched == false;
+
+                allSorted = itemPushedToTheEnd == false;
             }
 
             return source;
         } 
     }
+
+    
 }

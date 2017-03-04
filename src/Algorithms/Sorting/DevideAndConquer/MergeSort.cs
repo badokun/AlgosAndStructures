@@ -15,24 +15,31 @@ namespace Algorithms.Sorting.DevideAndConquer
             // Eventually we'll end up again with one item containing the reconstructed array
             while (bits.Count > 1)
             {
-                var inProgress = new List<T[]>();
+                var inConstruction = new List<T[]>();
                 for (int i = 0; i < bits.Count; i= i + 2)
                 {
-                    if (i + 1 > bits.Count-1)
+                    var left = bits[i];
+                    if (HasToTheRight(i, bits))
                     {
-                        inProgress.Add(bits[i]);
+                        inConstruction.Add(left);
                     }
                     else
                     {
-                        var joinedArray = CombineAndSort(bits[i], bits[i + 1]);
-                        inProgress.Add(joinedArray);
+                        var right = bits[i + 1];
+                        var joinedArray = CombineAndSort(left, right);
+                        inConstruction.Add(joinedArray);
                     }
                 }
 
-                bits = inProgress;
+                bits = inConstruction;
             }
 
             return bits[0];
+        }
+
+        private static bool HasToTheRight<T>(int i, List<T[]> bits) where T : IComparable<T>
+        {
+            return i + 1 > bits.Count-1;
         }
 
         private static void MakeArraysOfOne<T>(T[] source, List<T[]> bits) where T : IComparable<T>
