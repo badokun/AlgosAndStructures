@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Data.Common;
-using System.Diagnostics;
 
 namespace Algorithms.Sorting.DevideAndConquer
 {
