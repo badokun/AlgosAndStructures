@@ -55,9 +55,6 @@ namespace AlgorithmTests.Search
             // Assert
             Assert.AreEqual(5, results.Count);
             Assert.AreEqual(toSearch.IndexOf(toFind, StringComparison.Ordinal), results[0].Start);
-
-            
         }
-
     }
 }
