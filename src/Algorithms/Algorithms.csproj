@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hashtable.cs" />
+    <Compile Include="Lists\MyLinkedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\BadMatchTable.cs" />
     <Compile Include="Search\IStringSearchAlgo.cs" />
