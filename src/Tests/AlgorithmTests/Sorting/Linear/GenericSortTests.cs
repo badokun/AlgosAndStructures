@@ -8,7 +8,7 @@ namespace AlgorithmTests.Sorting.Linear
     [TestFixture]
     public class GenericSortTests
     {
-        [TestCaseSource(typeof (SortingFunctionsSource), nameof(SortingFunctionsSource.Linear))]
+        [TestCaseSource(typeof (SortingAlgosSource), nameof(SortingAlgosSource.Linear))]
         public void OrderItemsCorrectly(string name, Func<int[], int[]> sortingFunction)
         {
             // Arrange
@@ -21,10 +21,10 @@ namespace AlgorithmTests.Sorting.Linear
             // Assert
             // Compare against .NET built in sorting
             Assert.AreEqual(string.Join(".", source.OrderBy(i => i)), string.Join(".", result));
-            Assert.AreEqual(source.Count(), result.Count());
+            Assert.AreEqual(source.Length, result.Count);
         }
 
-        [TestCaseSource(typeof(SortingFunctionsSource), nameof(SortingFunctionsSource.Linear))]
+        [TestCaseSource(typeof(SortingAlgosSource), nameof(SortingAlgosSource.Linear))]
         public void OrderItemsCorrectlyFixedSource(string name, Func<int[], int[]> sortingFunction)
         {
             // Arrange
@@ -38,7 +38,7 @@ namespace AlgorithmTests.Sorting.Linear
             Assert.AreEqual("2.2.4.7.8.9.12.13.15.18", string.Join(".", result));
         }
 
-        [TestCaseSource(typeof(SortingFunctionsSource), nameof(SortingFunctionsSource.Linear))]
+        [TestCaseSource(typeof(SortingAlgosSource), nameof(SortingAlgosSource.Linear))]
         public void OrderItemsCorrectlyFixedSourceAsInExample(string name, Func<int[], int[]> sortingFunction)
         {
             // Arrange

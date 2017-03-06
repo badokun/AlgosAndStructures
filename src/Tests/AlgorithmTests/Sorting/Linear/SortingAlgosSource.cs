@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace AlgorithmTests.Sorting.Linear
 {
-    public class SortingFunctionsSource
+    public class SortingAlgosSource
     {
         public static IEnumerable Linear
         {

@@ -44,13 +44,13 @@ namespace Algorithms.Sorting.DevideAndConquer
 
         private static void MakeArraysOfOne<T>(T[] source, List<T[]> bits) where T : IComparable<T>
         {
-            bits.AddRange(source.Select(t => new T[] {t}));
+            bits.AddRange(source.Select(t => new[] {t}));
         }
 
         private static T[] CombineAndSort<T>(T[] left, T[] right) where T : IComparable<T>
         {
             var result = new List<T>(left.Length + right.Length);
-            if (left[0].CompareTo(right[0]) < 0)
+            if (left[0].IsSmallerThan(right[0]))
             {
                 result.AddRange(left);
                 result.AddRange(right);

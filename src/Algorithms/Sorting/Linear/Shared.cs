@@ -1,5 +1,4 @@
 using System;
-using System.Net;
 
 namespace Algorithms.Sorting.Linear
 {
@@ -31,6 +30,11 @@ namespace Algorithms.Sorting.Linear
             }
 
             itemArray[insertionIndex] = valueToBeMoved;
+        }
+
+        internal static bool IsSmallerOrEqualThan<T>(this T left, T right) where T : IComparable<T>
+        {
+            return left.CompareTo(right) <= 0;
         }
 
         internal static bool IsSmallerThan<T>(this T left, T right) where T : IComparable<T>

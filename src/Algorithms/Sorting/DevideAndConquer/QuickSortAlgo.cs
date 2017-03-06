@@ -15,26 +15,28 @@ namespace Algorithms.Sorting.DevideAndConquer
         {
             if (lo < hi)
             {
-                var p = Partition<T>(source, lo, hi);
-                Quicksort<T>(source, lo, p - 1);
-                Quicksort<T>(source, p + 1, hi);
+                var p = Partition(source, lo, hi);
+                Quicksort(source, lo, p - 1);
+                Quicksort(source, p + 1, hi);
             }
         }
 
         private static int Partition<T>(T[] source, int lo, int hi) where T : IComparable<T>
         {
             var pivot = source[hi];
-            var i = lo - 1;
+            var wallIndex = lo - 1;
             for (int j = lo; j < hi; j++)
             {
-                if (source[j].CompareTo(pivot) <= 0)
+                if (source[j].IsSmallerOrEqualThan(pivot))
                 {
-                    i = i + 1;
-                    Shared.Swap(source, i, j);
+                    // Move wallIndex to right
+                    wallIndex = wallIndex + 1;
+                    Shared.Swap(source, wallIndex, j);
                 }
             }
-            Shared.Swap(source, hi, i + 1);
-            return i + 1;
+
+            Shared.Swap(source, hi, wallIndex + 1);
+            return wallIndex + 1;
         }
 
         

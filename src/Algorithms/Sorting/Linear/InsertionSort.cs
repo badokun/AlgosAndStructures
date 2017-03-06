@@ -24,9 +24,6 @@ namespace Algorithms.Sorting.Linear
             return itemArray;
         }
 
-       
-
-
         private static int FindInsertionIndex<T>(T[] itemArray, int currenIndex, T itemToCompare) where T : IComparable<T>
         {
             for (int j = currenIndex-1; j >= 0; j--)

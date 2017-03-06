@@ -49,12 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Search\SearchTests.cs" />
-    <Compile Include="Sorting\Linear\BubbleSortTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sorting\Linear\GenericSortTests.cs" />
-    <Compile Include="Sorting\Linear\InsertionSortTests.cs" />
     <Compile Include="Sorting\Linear\SortingAlgo.cs" />
-    <Compile Include="Sorting\Linear\SortingFunctionsSource.cs" />
+    <Compile Include="Sorting\Linear\SortingAlgosSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
