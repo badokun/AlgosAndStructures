@@ -21,6 +21,9 @@ namespace AlgorithmTests
             hashTable.Add("Pine Apples", new Fruit("Pine Apples"));
             hashTable.Add("Mangos", new Fruit("Mangos"));
             hashTable.Add("Papaya", new Fruit("Papaya"));
+
+            var removed = hashTable.Remove("Mangos");
+            removed = hashTable.Remove("Papaya");
         }
 
         class Fruit

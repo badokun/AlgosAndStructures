@@ -48,7 +48,7 @@ namespace Algorithms
 
         private void AddToSource(LinkedList<KeyValuePair<TKey, TValue>>[] source, TKey key, TValue item)
         {
-            var index = Math.Abs(key.GetHashCode())% source.Length;
+            var index = GetIndex(source, key);
             if (source[index] == null)
             {
                 source[index] = new LinkedList<KeyValuePair<TKey, TValue>>();
@@ -59,6 +59,39 @@ namespace Algorithms
             {
                 source[index].AddLast(new KeyValuePair<TKey, TValue>(key, item));
             }
+        }
+
+        private static int GetIndex(LinkedList<KeyValuePair<TKey, TValue>>[] source, TKey key)
+        {
+            var index = Math.Abs(key.GetHashCode())%source.Length;
+            return index;
+        }
+
+        public bool Remove(TKey key)
+        {
+            var index = GetIndex(_source, key);
+            var linkedList = _source[index];
+            if (linkedList.Count == 1)
+            {
+                _source[index] = null;
+                _fillCount --;
+                return true;
+            }
+
+            var current = linkedList.First;
+            while (current != null)
+            {
+                if (current.Value.Key.Equals(key))
+                {
+                    linkedList.Remove(current);
+                    return true;
+                }
+
+                current = current.Next;
+            }
+
+            return false;
+
         }
     }
 }
