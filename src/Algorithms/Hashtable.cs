@@ -4,39 +4,40 @@ using System.Linq;
 
 namespace Algorithms
 {
-    public class Hashtable<T>
+    public class Hashtable<TKey, TValue>
     {
-        private LinkedList<T>[] _source;
+         
+        private LinkedList<KeyValuePair<TKey, TValue>>[] _source;
         private int _fillCount;
         private const int MaxFillFactor = 40;
 
         public Hashtable()
         {
-            _source = new LinkedList<T>[10];
+            _source = new LinkedList<KeyValuePair<TKey, TValue>>[10];
             _fillCount = 0;
         }
-        public void Add(T item)
+
+        public void Add(TKey key, TValue item)
         {
             if (FillFactor() >= MaxFillFactor)
             {
                 _fillCount = 0;
-                var recreatedList = new LinkedList<T>[_source.Length*2];
+                var recreatedList = new LinkedList<KeyValuePair<TKey, TValue>>[_source.Length*2];
                 foreach (var sourceItem in _source)
                 {
                     if (sourceItem != null)
                     {
                         foreach (var singleItem in sourceItem)
                         {
-                            AddToSource(recreatedList, singleItem);
+                            AddToSource(recreatedList, singleItem.Key, singleItem.Value);
                         }
                     }
                 }
                 _source = recreatedList;
             }
-            else
-            {
-                AddToSource(_source, item);
-            }
+
+
+            AddToSource(_source, key, item);
         }
 
         private int FillFactor()
@@ -45,18 +46,18 @@ namespace Algorithms
             return (int)v;
         }
 
-        private void AddToSource(LinkedList<T>[] source, T item)
+        private void AddToSource(LinkedList<KeyValuePair<TKey, TValue>>[] source, TKey key, TValue item)
         {
-            var index = Math.Abs(item.GetHashCode())% source.Length;
+            var index = Math.Abs(key.GetHashCode())% source.Length;
             if (source[index] == null)
             {
-                source[index] = new LinkedList<T>();
-                source[index].AddFirst(item);
+                source[index] = new LinkedList<KeyValuePair<TKey, TValue>>();
+                source[index].AddFirst(new KeyValuePair<TKey, TValue>(key, item));
                 _fillCount++;
             }
             else
             {
-                source[index].AddLast(item);
+                source[index].AddLast(new KeyValuePair<TKey, TValue>(key, item));
             }
         }
     }
