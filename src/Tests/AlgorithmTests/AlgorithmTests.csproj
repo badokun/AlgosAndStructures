@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="HashtableTests.cs" />
     <Compile Include="Lists\LinkedListTests.cs" />
+    <Compile Include="LoyaltyPoints\PointsEngineTests.cs" />
     <Compile Include="Search\SearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sorting\Linear\GenericSortTests.cs" />

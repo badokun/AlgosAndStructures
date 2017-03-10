@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Hashtable.cs" />
     <Compile Include="Lists\MyLinkedList.cs" />
+    <Compile Include="LoyaltyPoints\PointsEngine.cs" />
+    <Compile Include="LoyaltyPoints\Score.cs" />
+    <Compile Include="LoyaltyPoints\Rule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\BadMatchTable.cs" />
     <Compile Include="Search\IStringSearchAlgo.cs" />
