@@ -19,33 +19,36 @@ namespace Algorithms.LoyaltyPoints
             Func<Rule, int> endFunc,
             SortOrder sortOrder )
         {
-            var first = sortedRules.First();
-            var leftWall = startFunc(first);
-            var rightWall = endFunc(first);
-            var points = first.Points;
+            var firstRule = sortedRules.First();
+            var leftWall = startFunc(firstRule);
+            var rightWall = endFunc(firstRule);
+            var points = firstRule.Points;
             for (int i = 1; i < sortedRules.Length; i++)
             {
                 var current = sortedRules[i];
-                if (sortOrder == SortOrder.Asc)
-                {
-                    yield return new Score(leftWall, startFunc(current), points);
-                }
-                else
-                {
-                    yield return new Score(startFunc(current), leftWall, points);
-                }
-                leftWall = startFunc(current);
+                var currentStart = startFunc(current);
 
                 if (sortOrder == SortOrder.Asc)
                 {
-                    if (rightWall > startFunc(current))
+                    yield return new Score(leftWall, currentStart, points);
+                }
+                else
+                {
+                    yield return new Score(currentStart, leftWall, points);
+                }
+
+                leftWall = currentStart;
+
+                if (sortOrder == SortOrder.Asc)
+                {
+                    if (rightWall > currentStart)
                     {
                         points += current.Points;
                     }
                 }
                 else
                 {
-                    if (rightWall < startFunc(current))
+                    if (rightWall < currentStart)
                     {
                         points += current.Points;
                     }

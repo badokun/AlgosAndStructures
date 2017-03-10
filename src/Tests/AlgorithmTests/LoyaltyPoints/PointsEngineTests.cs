@@ -52,6 +52,40 @@ namespace AlgorithmTests.LoyaltyPoints
             Assert.AreEqual(5, results.Count);
         }
 
+        [Test]
+        public void TestPointsTwo()
+        {
+            /*
+           Rule 2: |------3------| 
+           Rule 1:     |--------5--------| 
+           Result: |-3-|-8-------|-----5-|  
+
+           Rule 1:     |--------5--------| 
+           Rule 2: |------3------| 
+           Result: |-3-|-8-------|-----5-|  
+           */
+
+            // Arrange
+            var engine = new PointsEngine();
+            engine.AddRule(new Rule() { Start = 5, End = 30, Points = 5 });
+            engine.AddRule(new Rule() { Start = 1, End = 15, Points = 3 });
+
+            // Act
+            var results = engine.CalculatePoints().OrderBy(r => r.Start).ToList();
+
+            // Assert
+            AssertRule(results[0].Start, results[0].End, results[0].Points,
+                1, 5, 3);
+            AssertRule(results[1].Start, results[1].End, results[1].Points,
+                5, 15, 8);
+            AssertRule(results[2].Start, results[2].End, results[2].Points,
+                15, 30, 5);
+
+          
+
+            Assert.AreEqual(3, results.Count);
+        }
+
         private void AssertRule(int start, int end, int points, 
             int expectedStart,
             int expectedEnd,
