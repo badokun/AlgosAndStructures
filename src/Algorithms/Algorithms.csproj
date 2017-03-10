@@ -57,6 +57,7 @@
     <Compile Include="Sorting\Linear\InsertionSort.cs" />
     <Compile Include="Sorting\Linear\SelectionSort.cs" />
     <Compile Include="Sorting\Linear\Shared.cs" />
+    <Compile Include="StringCalculator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

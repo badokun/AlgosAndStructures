@@ -56,6 +56,7 @@
     <Compile Include="Sorting\Linear\GenericSortTests.cs" />
     <Compile Include="Sorting\Linear\SortingAlgo.cs" />
     <Compile Include="Sorting\Linear\SortingAlgosSource.cs" />
+    <Compile Include="StringCalculatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
