@@ -6,10 +6,57 @@ namespace Algorithms.LoyaltyPoints
 {
     public class PointsEngine
     {
+        enum SortOrder { Asc, Desc}
         private readonly List<Rule> _rules = new List<Rule>();
         public void AddRule(Rule rule)
         {
             _rules.Add(rule);
+        }
+
+        private IEnumerable<Score> CalculatePoints(
+            Rule[] sortedRules, 
+            Func<Rule, int> startFunc, 
+            Func<Rule, int> endFunc,
+            SortOrder sortOrder )
+        {
+            var first = sortedRules.First();
+            var leftWall = startFunc(first);
+            var rightWall = endFunc(first);
+            var points = first.Points;
+            for (int i = 1; i < sortedRules.Length; i++)
+            {
+                var current = sortedRules[i];
+                if (sortOrder == SortOrder.Asc)
+                {
+                    yield return new Score(leftWall, startFunc(current), points);
+                }
+                else
+                {
+                    yield return new Score(startFunc(current), leftWall, points);
+                }
+                leftWall = startFunc(current);
+
+                if (sortOrder == SortOrder.Asc)
+                {
+                    if (rightWall > startFunc(current))
+                    {
+                        points += current.Points;
+                    }
+                }
+                else
+                {
+                    if (rightWall < startFunc(current))
+                    {
+                        points += current.Points;
+                    }
+                }
+            }
+
+            if (sortOrder == SortOrder.Asc)
+            {
+                yield return new Score(leftWall, rightWall, points);
+            }
+            
         }
 
         public IEnumerable<Score> CalculatePoints()
@@ -26,44 +73,15 @@ namespace Algorithms.LoyaltyPoints
             Rule 2: |------3------| 
             Result: |-3-|-8-|--9--|-6-|-5-| 
             */
-            var asc = _rules.OrderBy(r => r.Start).ToList();
-            var first = asc.First();
-            var start = first.Start;
-            var end = first.End;
-            var points = first.Points;
-            for (int i = 1; i < asc.Count; i++)
-            {
-                var current = asc[i];
-                yield return new Score(start, current.Start, points);
-                start = current.Start;
-                if (end > current.Start)
-                {
-                    points += current.Points;
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            var asc = _rules.OrderBy(r => r.Start).ToArray();
+            var score = new List<Score>();
+            score.AddRange(CalculatePoints(
+                asc, rule => rule.Start, rule => rule.End, SortOrder.Asc));
+            var desc = _rules.OrderByDescending(r => r.End).ToArray();
+            score.AddRange(CalculatePoints(desc, rule => rule.End, rule => rule.Start,
+                SortOrder.Desc));
 
-            yield return new Score(start, end, points);
-
-
-            var desc = _rules.OrderByDescending(r => r.End).ToList();
-            var firstDesc = desc.First();
-            start = firstDesc.Start;
-            end = firstDesc.End;
-            points = firstDesc.Points;
-            for (int i = 1; i < desc.Count; i++)
-            {
-                var current = desc[i];
-                yield return new Score(current.End, end, points);
-                end = current.End;
-                if (current.Start > start)
-                {
-                    points += current.Points;
-                }
-            }
+            return score;
         }
     }
 }
